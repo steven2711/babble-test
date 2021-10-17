@@ -1,10 +1,12 @@
 const tigerAnchor = document.getElementById("tigerAnchor");
 const miyaAnchor = document.getElementById("miyaAnchor");
+const animeAnchor = document.getElementById("animeAnchor");
 const ios = document.getElementById("ios");
 const btnBox = document.getElementById("btnBox");
 
-const tigerFiles = ["audio/ohno.mp3"];
+const tigerFiles = ["audio/funny-tiger.mp3"];
 const miyaFiles = ["audio/omgmiya.mp3"];
+const animeFiles = ["audio/ohno.mp3"];
 
 let sound = null;
 let isIOS = null;
@@ -47,6 +49,29 @@ miyaAnchor.addEventListener("markerFound", async (e) => {
   if (!isPlaying) {
     const randomNumber = randomInteger(0, miyaFiles.length - 1);
     sound.src = miyaFiles[randomNumber];
+
+    if (isIOS && btn.innerText === "Sound On") {
+      isPlaying = true;
+      const test = await playSound(sound);
+
+      if (test.type === "ended") {
+        isPlaying = false;
+      }
+    } else if (!isIOS) {
+      isPlaying = true;
+      const test = await playSound(sound);
+
+      if (test.type === "ended") {
+        isPlaying = false;
+      }
+    }
+  }
+});
+
+animeAnchor.addEventListener("markerFound", async (e) => {
+  if (!isPlaying) {
+    const randomNumber = randomInteger(0, animeFiles.length - 1);
+    sound.src = animeFiles[randomNumber];
 
     if (isIOS && btn.innerText === "Sound On") {
       isPlaying = true;
