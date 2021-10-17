@@ -3,7 +3,7 @@ const miyaAnchor = document.getElementById("miyaAnchor");
 const ios = document.getElementById("ios");
 const btnBox = document.getElementById("btnBox");
 
-const tigerFiles = ["audio/funny-tiger.mp3"];
+const tigerFiles = ["audio/ohno.mp3"];
 const miyaFiles = ["audio/omgmiya.mp3"];
 
 let sound = null;
@@ -11,7 +11,7 @@ let isIOS = null;
 let isPlaying = false;
 
 // Load btn with default sound track
-let btn = createButton(audioFiles[0]);
+let btn = createButton(tigerFiles[0]);
 
 if (/webOS|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
   btnBox.appendChild(btn);
