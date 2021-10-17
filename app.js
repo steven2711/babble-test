@@ -1,8 +1,10 @@
-const anchor = document.getElementById("anchor");
+const tigerAnchor = document.getElementById("tigerAnchor");
+const miyaAnchor = document.getElementById("miyaAnchor");
 const ios = document.getElementById("ios");
 const btnBox = document.getElementById("btnBox");
 
-const audioFiles = ["audio/funny-tiger.mp3"];
+const tigerFiles = ["audio/funny-tiger.mp3"];
+const miyaFiles = ["audio/omgmiya.mp3"];
 
 let sound = null;
 let isIOS = null;
@@ -18,12 +20,33 @@ if (/webOS|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
   sound = new Audio("chris-gilbert-laugh.mp3");
 }
 
-console.log(isPlaying);
-
-anchor.addEventListener("markerFound", async (e) => {
+tigerAnchor.addEventListener("markerFound", async (e) => {
   if (!isPlaying) {
-    const randomNumber = randomInteger(0, audioFiles.length - 1);
-    sound.src = audioFiles[randomNumber];
+    const randomNumber = randomInteger(0, tigerFiles.length - 1);
+    sound.src = tigerFiles[randomNumber];
+
+    if (isIOS && btn.innerText === "Sound On") {
+      isPlaying = true;
+      const test = await playSound(sound);
+
+      if (test.type === "ended") {
+        isPlaying = false;
+      }
+    } else if (!isIOS) {
+      isPlaying = true;
+      const test = await playSound(sound);
+
+      if (test.type === "ended") {
+        isPlaying = false;
+      }
+    }
+  }
+});
+
+miyaAnchor.addEventListener("markerFound", async (e) => {
+  if (!isPlaying) {
+    const randomNumber = randomInteger(0, miyaFiles.length - 1);
+    sound.src = miyaFiles[randomNumber];
 
     if (isIOS && btn.innerText === "Sound On") {
       isPlaying = true;
